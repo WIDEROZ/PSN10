@@ -47,23 +47,32 @@ begin
     begin
         case mode is
             when "001" => output <= SrcA + SrcB;--add
-            when "010" => output <= SrcA + SrcB;--sub
+            when "010" => output <= SrcA - SrcB;--sub
             when "011" => --equal
                 if(SrcA = SrcB) then
                     zero <= '1';
+                else
+                    zero <= '0';
                 end if;
             when "100" => --not equal
                 if(SrcA /= SrcB) then
                     zero <= '1';
+                else
+                    zero <= '0';
                 end if;
             when "101" => --lower than
                 if(SrcA < SrcB) then
                     zero <= '1';
+                else
+                    zero <= '0';
                 end if;
             when "110" => --greater or equal than
                 if(SrcA >= SrcB) then
                     zero <= '1';
+                else
+                    zero <= '0';
                 end if;
+            when others => --Autres : ne rien faire
         end case;
     end process;
 end Behavioral;

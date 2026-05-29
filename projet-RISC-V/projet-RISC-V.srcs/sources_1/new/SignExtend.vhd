@@ -59,6 +59,7 @@ begin
                 imm(0) <= '0';
                 imm(20 downto 1) <= instruct(31) & instruct(19 downto 12) & instruct(20) & instruct(30 downto 21); --[20|10:1|11|19:12] <=> [31|19:12|20|30:21]
                 imm(31 downto 21) <= (others => instruct(31));  
+            when others => --Autres : ne rien faire
         end case;
     end process;
 end Behavioral;
