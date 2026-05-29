@@ -21,7 +21,7 @@
 
 library IEEE;
 use IEEE.STD_LOGIC_1164.ALL;
-use IEEE.STD_LOGIC_UNSIGNED.ALL;
+use IEEE.NUMERIC_STD.ALL;
 
 -- Uncomment the following library declaration if using
 -- arithmetic functions with Signed or Unsigned values
@@ -46,8 +46,8 @@ begin
     process (mode, SrcA, SrcB)
     begin
         case mode is
-            when "001" => output <= SrcA + SrcB;--add
-            when "010" => output <= SrcA - SrcB;--sub
+            when "001" => output <= std_logic_vector(unsigned(SrcA) + unsigned(SrcB));--add
+            when "010" => output <= std_logic_vector(unsigned(SrcA) - unsigned(SrcB));--sub
             when "011" => --equal
                 if(SrcA = SrcB) then
                     zero <= '1';
@@ -61,13 +61,13 @@ begin
                     zero <= '0';
                 end if;
             when "101" => --lower than
-                if(SrcA < SrcB) then
+                if(signed(SrcA) < signed(SrcB)) then
                     zero <= '1';
                 else
                     zero <= '0';
                 end if;
             when "110" => --greater or equal than
-                if(SrcA >= SrcB) then
+                if(signed(SrcA) >= signed(SrcB)) then
                     zero <= '1';
                 else
                     zero <= '0';
